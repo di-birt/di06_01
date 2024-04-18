@@ -4,6 +4,7 @@ import { IonicModule } from '@ionic/angular';
 import { HomePage } from './home.page';
 import { MiServicioService } from '../service/mi-servicio.service';
 import { MicomponenteComponent } from '../component/micomponente/micomponente.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('HomePage', () => {
   let component: HomePage;
@@ -15,7 +16,7 @@ describe('HomePage', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [HomePage],
-      imports: [IonicModule.forRoot()],
+      imports: [IonicModule.forRoot(), HttpClientTestingModule],
       providers: [MiServicioService, MicomponenteComponent]
     }).compileComponents();
 

@@ -10,6 +10,7 @@ export class MicomponenteComponent  implements OnInit {
 
   miVariable: any[] = [];
   miSubject: any;
+  miData: any = null;
 
   constructor(private miServicio: MiServicioService ) {
     this.miSubject = this.miServicio.getInformacion();
@@ -19,6 +20,12 @@ export class MicomponenteComponent  implements OnInit {
 
   suma(num1: number, num2: number){
     return num1 + num2;
+  }
+
+  getMiJson(){
+    this.miServicio.getDatosDesdeJson().subscribe((dato) =>{
+      this.miData = dato;
+    });
   }
 
 }
