@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { RespuestaNoticias } from '../interfaces/interfaces';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +9,7 @@ import { BehaviorSubject } from 'rxjs';
 export class MiServicioService {
   private miSubject: BehaviorSubject<string[]> = new BehaviorSubject(['HOLA']);
 
-  constructor() { }
+  constructor(private leerArticulosFicheroHttp: HttpClient) { }
 
   getInformacion(){
     return this.miSubject.asObservable();
@@ -15,5 +17,11 @@ export class MiServicioService {
 
   setInformacion(informacion: string[]){
     this.miSubject.next(informacion);
+  }
+
+  getDatosDesdeJson(){
+    let respNoticiasObservable: Observable<RespuestaNoticias>;
+    respNoticiasObservable = this.leerArticulosFicheroHttp.get<RespuestaNoticias>("/assets/datos/articulos.json");
+    return respNoticiasObservable;
   }
 }
